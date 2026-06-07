@@ -1,1 +1,720 @@
 # inamigos-foundation
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InAmigos Foundation — Uniting Minds For Change</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --teal:       #1a6b6c;
+  --teal-light: #2c9a9b;
+  --teal-pale:  #e4f5f5;
+  --gold:       #c9952a;
+  --dark:       #0f1e1e;
+  --mid:        #3a5050;
+  --smoke:      #f7fafa;
+  --white:      #ffffff;
+  --text:       #2a3a3a;
+  --text-soft:  #5a7070;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 7%;
+  background: rgba(15,30,30,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: padding .3s;
+}
+
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: .04em;
+}
+
+.nav-brand span { color: var(--gold); }
+
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a {
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-size: .88rem;
+  font-weight: 500;
+  letter-spacing:.05em;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-cta {
+  padding: 9px 22px;
+  background: var(--gold);
+  color: var(--dark) !important;
+  border-radius: 4px;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: #e0a830 !important; color: var(--dark) !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 70% 50%, rgba(44,154,155,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,149,42,0.10) 0%, transparent 60%);
+}
+
+/* subtle grid lines */
+.hero-bg::after {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position:relative;
+  z-index:2;
+  padding: 0 7%;
+  max-width: 780px;
+  animation: fadeUp .9s ease both;
+}
+
+.hero-eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom:28px;
+}
+.hero-eyebrow::before {
+  content:'';
+  width:36px; height:1px;
+  background:var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+
+.hero h1 em {
+  font-style:normal;
+  color:var(--teal-light);
+}
+
+.hero p {
+  font-size:1.05rem;
+  line-height:1.75;
+  color:rgba(255,255,255,0.62);
+  max-width:540px;
+  margin-bottom:44px;
+}
+
+.hero-actions { display:flex; gap:16px; flex-wrap:wrap; }
+
+.btn-primary {
+  padding:14px 32px;
+  background:var(--teal-light);
+  color:var(--white);
+  border-radius:4px;
+  text-decoration:none;
+  font-weight:500;
+  font-size:.95rem;
+  letter-spacing:.03em;
+  transition:background .2s, transform .2s;
+}
+.btn-primary:hover { background:var(--teal); transform:translateY(-2px); }
+
+.btn-outline {
+  padding:14px 32px;
+  border:1px solid rgba(255,255,255,0.28);
+  color:rgba(255,255,255,0.82);
+  border-radius:4px;
+  text-decoration:none;
+  font-weight:500;
+  font-size:.95rem;
+  transition:border-color .2s, color .2s;
+}
+.btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+
+/* stats strip */
+.hero-stats {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  z-index:2;
+  display:flex;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+
+.stat-item {
+  flex:1;
+  padding:26px 0;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+  animation: fadeUp .9s ease both;
+}
+.stat-item:last-child { border-right:none; }
+
+.stat-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  font-weight:600;
+  color:var(--white);
+  display:block;
+}
+
+.stat-label {
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  margin-top:4px;
+  display:block;
+}
+
+/* ── SECTION SHARED ── */
+section { padding:100px 7%; }
+
+.section-tag {
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--teal-light);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+.section-tag::before { content:''; width:28px; height:1px; background:var(--teal-light); }
+
+.section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:400;
+  line-height:1.2;
+  color:var(--dark);
+  margin-bottom:20px;
+}
+
+.section-body {
+  font-size:1rem;
+  line-height:1.8;
+  color:var(--text-soft);
+  max-width:640px;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+  margin-top:0;
+}
+
+.about-visual {
+  position:relative;
+  height:480px;
+}
+
+.about-img-main {
+  position:absolute;
+  top:0; left:0;
+  width:82%;
+  height:88%;
+  object-fit:cover;
+  border-radius:4px;
+}
+
+.about-img-accent {
+  position:absolute;
+  bottom:0; right:0;
+  width:52%;
+  height:52%;
+  object-fit:cover;
+  border-radius:4px;
+  border:6px solid var(--white);
+  box-shadow:0 20px 60px rgba(0,0,0,0.14);
+}
+
+.about-badge {
+  position:absolute;
+  top:50%; left:62%;
+  transform:translate(-50%,-50%);
+  background:var(--gold);
+  color:var(--white);
+  border-radius:50%;
+  width:96px; height:96px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  box-shadow:0 10px 30px rgba(201,149,42,.35);
+  z-index:3;
+}
+.about-badge strong { font-size:1.8rem; font-weight:700; line-height:1; }
+.about-badge span   { font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; }
+
+/* ── PROJECTS ── */
+.projects-section { background:var(--smoke); }
+
+.projects-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
+  margin-top:60px;
+}
+
+.project-card {
+  background:var(--white);
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 2px 20px rgba(0,0,0,0.06);
+  transition:transform .3s, box-shadow .3s;
+}
+.project-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(0,0,0,0.12); }
+
+.project-card img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s;
+}
+.project-card:hover img { transform:scale(1.04); }
+
+.project-img-wrap { overflow:hidden; }
+
+.project-body { padding:28px 26px; }
+
+.project-tag {
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--teal-light);
+  margin-bottom:10px;
+}
+
+.project-body h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;
+  font-weight:600;
+  color:var(--dark);
+  margin-bottom:10px;
+}
+
+.project-body p {
+  font-size:.9rem;
+  line-height:1.7;
+  color:var(--text-soft);
+}
+
+/* ── IMPACT ── */
+.impact-section {
+  background:var(--teal);
+  color:var(--white);
+}
+
+.impact-section .section-tag  { color:rgba(255,255,255,0.55); }
+.impact-section .section-tag::before { background:rgba(255,255,255,0.35); }
+.impact-section .section-title { color:var(--white); }
+
+.impact-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:2px;
+  margin-top:60px;
+  background:rgba(255,255,255,0.1);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.impact-item {
+  padding:44px 32px;
+  background:rgba(255,255,255,0.04);
+  text-align:center;
+  transition:background .2s;
+}
+.impact-item:hover { background:rgba(255,255,255,0.1); }
+
+.impact-icon { font-size:2rem; margin-bottom:14px; display:block; }
+
+.impact-number {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem;
+  font-weight:700;
+  color:var(--white);
+  line-height:1;
+  margin-bottom:8px;
+  display:block;
+}
+
+.impact-desc {
+  font-size:.82rem;
+  font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+}
+
+/* ── TESTIMONIAL / QUOTE ── */
+.quote-section {
+  background:var(--dark);
+  text-align:center;
+  padding:100px 7%;
+}
+
+.quote-section blockquote {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3.5vw,2.8rem);
+  font-weight:300;
+  color:var(--white);
+  line-height:1.45;
+  max-width:820px;
+  margin:0 auto 32px;
+  position:relative;
+}
+
+.quote-section blockquote::before {
+  content:'❝';
+  position:absolute;
+  top:-30px; left:-20px;
+  font-size:5rem;
+  color:var(--teal-light);
+  opacity:.25;
+  line-height:1;
+}
+
+.quote-author {
+  font-size:.82rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* ── CTA ── */
+.cta-section {
+  background:var(--smoke);
+  text-align:center;
+}
+
+.cta-section .section-tag { justify-content:center; }
+.cta-section .section-tag::before { display:none; }
+
+.cta-section .section-body { margin:0 auto 48px; text-align:center; }
+
+.cta-btn {
+  display:inline-block;
+  padding:16px 44px;
+  background:var(--teal);
+  color:var(--white);
+  text-decoration:none;
+  font-weight:500;
+  font-size:1rem;
+  letter-spacing:.04em;
+  border-radius:4px;
+  transition:background .2s, transform .2s;
+}
+.cta-btn:hover { background:var(--teal-light); transform:translateY(-2px); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--dark);
+  color:rgba(255,255,255,0.4);
+  text-align:center;
+  padding:36px 20px;
+  font-size:.85rem;
+}
+
+footer strong { color:rgba(255,255,255,0.7); }
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity:1;
+  transform:none;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid { grid-template-columns:1fr; gap:50px; }
+  .hero-stats  { display:none; }
+  nav { padding:16px 5%; }
+  .nav-links { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">In<span>Amigos</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#join" class="nav-cta">Volunteer</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Section 8 Registered NGO · Est. 2020</div>
+    <h1>Uniting Minds<br>For <em>Change</em></h1>
+    <p>
+      We work at the intersection of education, environment, and community welfare —
+      building a more inclusive society one initiative at a time.
+    </p>
+    <div class="hero-actions">
+      <a href="#join" class="btn-primary">Join the Mission</a>
+      <a href="#projects" class="btn-outline">Our Projects ↓</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">20K+</span>
+      <span class="stat-label">Trees Planted</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">50K+</span>
+      <span class="stat-label">Meals Distributed</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">900+</span>
+      <span class="stat-label">Girls Empowered</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">50+</span>
+      <span class="stat-label">Animals Fed Daily</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <img class="about-img-main"
+           src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format"
+           alt="InAmigos team">
+      <img class="about-img-accent"
+           src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&auto=format"
+           alt="Community work">
+      <div class="about-badge">
+        <strong>5+</strong>
+        <span>Years</span>
+      </div>
+    </div>
+    <div class="reveal" style="animation-delay:.15s">
+      <div class="section-tag">Who We Are</div>
+      <h2 class="section-title">A Grassroots Force for Good</h2>
+      <p class="section-body" style="margin-bottom:24px;">
+        InAmigos Foundation is a Section 8 registered non-profit organisation dedicated to
+        improving lives through education, social welfare, environmental conservation,
+        animal welfare, and community development.
+      </p>
+      <p class="section-body">
+        Since our founding in 2020, we have grown from a small volunteer circle into
+        a structured organisation running several impactful programmes across India,
+        always driven by the belief that collective action creates lasting change.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-tag reveal">What We Do</div>
+  <h2 class="section-title reveal">Ongoing Projects</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-img-wrap">
+        <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?w=700&auto=format" alt="Tree Plantation">
+      </div>
+      <div class="project-body">
+        <div class="project-tag">Environment</div>
+        <h3>Project Prakriti</h3>
+        <p>Large-scale tree plantation drives and environmental sustainability campaigns for a greener tomorrow.</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:.1s">
+      <div class="project-img-wrap">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=700&auto=format" alt="Food Distribution">
+      </div>
+      <div class="project-body">
+        <div class="project-tag">Social Welfare</div>
+        <h3>Project Seva</h3>
+        <p>Regular food drives and essential support systems for underprivileged communities across the region.</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:.2s">
+      <div class="project-img-wrap">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&auto=format" alt="Women Empowerment">
+      </div>
+      <div class="project-body">
+        <div class="project-tag">Empowerment</div>
+        <h3>Project Udaan</h3>
+        <p>Awareness campaigns and skill-building workshops to empower girls and women towards independence.</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:.3s">
+      <div class="project-img-wrap">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=700&auto=format" alt="Animal Welfare">
+      </div>
+      <div class="project-body">
+        <div class="project-tag">Animal Welfare</div>
+        <h3>Project Jeev</h3>
+        <p>Daily feeding, medical aid, and care initiatives for stray and injured animals in urban neighbourhoods.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="impact-section">
+  <div class="section-tag reveal">By The Numbers</div>
+  <h2 class="section-title reveal">Our Collective Impact</h2>
+
+  <div class="impact-grid">
+    <div class="impact-item reveal">
+      <span class="impact-icon">🌱</span>
+      <span class="impact-number">20,000+</span>
+      <span class="impact-desc">Trees Planted</span>
+    </div>
+    <div class="impact-item reveal" style="transition-delay:.1s">
+      <span class="impact-icon">🍲</span>
+      <span class="impact-number">50,000+</span>
+      <span class="impact-desc">Meals Distributed</span>
+    </div>
+    <div class="impact-item reveal" style="transition-delay:.2s">
+      <span class="impact-icon">👩</span>
+      <span class="impact-number">900+</span>
+      <span class="impact-desc">Girls Empowered</span>
+    </div>
+    <div class="impact-item reveal" style="transition-delay:.3s">
+      <span class="impact-icon">🐾</span>
+      <span class="impact-number">50+</span>
+      <span class="impact-desc">Animals Fed Daily</span>
+    </div>
+    <div class="impact-item reveal" style="transition-delay:.4s">
+      <span class="impact-icon">📚</span>
+      <span class="impact-number">∞</span>
+      <span class="impact-desc">Rural Education</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <blockquote class="reveal">
+    "The smallest act of kindness is worth more than the grandest intention."
+  </blockquote>
+  <div class="quote-author reveal">Guiding Principle — InAmigos Foundation</div>
+</div>
+
+<!-- JOIN CTA -->
+<section id="join" class="cta-section">
+  <div class="section-tag reveal">Get Involved</div>
+  <h2 class="section-title reveal">Become a Change Maker</h2>
+  <p class="section-body reveal">
+    Join thousands of volunteers and supporters who are working with us to create
+    a lasting, positive impact in communities across India.
+  </p>
+  <a class="cta-btn reveal"
+     href="https://inamigosfoundation.org.in/?utm_source=ig&utm_medium=social&utm_content=link_in_bio"
+     target="_blank" rel="noopener">
+    Volunteer Now →
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong>InAmigos Foundation</strong> &nbsp;·&nbsp; Uniting Minds For Change &nbsp;·&nbsp; Section 8 Registered NGO</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Sticky nav shrink
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.padding = window.scrollY > 60 ? '13px 7%' : '20px 7%';
+});
+</script>
+</body>
+</html>
